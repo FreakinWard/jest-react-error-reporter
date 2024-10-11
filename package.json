@@ -1,0 +1,11 @@
+{
+  "name": "jest-error-reporter",
+  "version": "1.0.0",
+  "description": "Summarizes jest logs outputs in order to more easily understand errors and effected components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "FreakinWard",
+  "license": "ISC"
+}
