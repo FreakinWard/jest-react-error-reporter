@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# test
+/coverage
+
+# production
+/dist
+
+# dotenv files
+*.env
+.env
