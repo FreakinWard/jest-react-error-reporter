@@ -1,5 +1,6 @@
 import fs from 'fs';
 import clipboardy from 'clipboardy';
+import {program} from 'commander';
 
 // Function to read the jest_output.log file
 function readLogFile(filePath) {
@@ -7,11 +8,20 @@ function readLogFile(filePath) {
 }
 
 function extractTestSuite(line) {
-  const fileNamePath = line.split(' ')[1];
-  const fileName = fileNamePath.split('/').pop();
-  const testName = fileName.replace('.test.tsx', '.test');
+  const testFilePattern = /(\S+\/)?(\S+\.test\.tsx)/;
 
-  return { name: testName, issues: [] };
+  // Match the line against the test file pattern
+  const match = line.match(testFilePattern);
+
+  if (match) {
+    const fullFileName = match[2];  // Get the full file name from the match
+    const testName = fullFileName.replace('.test.tsx', '.test');
+
+    return { name: testName, issues: [] };
+  }
+
+  // Return null if no test suite is found in the command
+  return null;
 }
 
 const extractIssueStacktrace = (lines,  line) => {
@@ -80,6 +90,7 @@ function parseLogFile(logContent) {
         if (index < advanceToIndex) return acc;
 
         const lineHasNewTestSuite =
+            line.includes('.test.ts') ||
             line.startsWith('PASS') || line.startsWith('FAIL');
 
         if (lineHasNewTestSuite) {
@@ -160,6 +171,7 @@ function formatAsMarkdown(testSuites) {
         issue.components?.length > 0 ? formatComponents(issue.components) : [];
 
     return [issueLine, componentLines].join('\n');
+    // return [issueLine, componentLines];
   };
 
   const formatComponents = (components) => {
@@ -180,8 +192,18 @@ function formatAsMarkdown(testSuites) {
 }
 
 // Main function to execute the steps
-function main() {
-  const logContent = readLogFile('jest_output.log');
+const defaultFileName = 'jest_output.log';
+// const defaultFileName = '../../rsi/RevXUI/jest_output_WorkflowAssignmentsGrid';
+function logParser(filename = defaultFileName) {
+  try {
+    fs.accessSync(filename, fs.constants.R_OK);
+  } catch (err) {
+    throw new Error(`File '${filename}' does not exist`);
+  }
+
+  const logContent = readLogFile(filename);
+  // const logContent = readLogFile('jest_output.log');
+  // const logContent = readLogFile('jest_output_WorkflowAssignmentsGrid');
 
   const testSuites = parseLogFile(logContent);
 
@@ -192,4 +214,19 @@ function main() {
   console.log('Markdown has been copied to clipboard.');
 }
 
-main();
+const app = ()=> {
+  program
+    .name('jest-error-reporter')
+    .description('CLI to summarize Jest test output in search of errors and effected components')
+    .version('0.8.0')
+    .option('-f, --file <filename>', 'filename or path to the jest output file')
+    .action((options) => {
+      console.log(`filename: ${options.file}`, {options});
+
+     logParser(options.file)
+    });
+
+  program.parse();
+  }
+
+app();
