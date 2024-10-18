@@ -8,14 +8,14 @@ function readLogFile(filePath) {
 }
 
 function extractTestSuite(line) {
-  const testFilePattern = /(\S+\/)?(\S+\.test\.tsx)/;
+  const testFilePattern = /(\S+\/)?(\S+\.test\.(tsx|ts))/;
 
   // Match the line against the test file pattern
   const match = line.match(testFilePattern);
 
   if (match) {
     const fullFileName = match[2];  // Get the full file name from the match
-    const testName = fullFileName.replace('.test.tsx', '.test');
+    const testName = fullFileName.replace(/\.test\.(tsx|ts)/, '.test');
 
     return { name: testName, issues: [] };
   }
@@ -102,7 +102,7 @@ function parseLogFile(logContent) {
         }
 
         const lineStartsNewIssue =
-            line.includes('console.error') || line.includes('console.warning');
+            line.includes('console.error') || line.includes('console.warn');
 
         if (lineStartsNewIssue) {
           const issue = extractIssue(lines, line, index);
