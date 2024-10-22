@@ -6,16 +6,15 @@ Install node packages: `npm install`
 
 Run test and capture the output:
 ```bash 
-npm run test:cover 2>&1 | tee jest_output.log
+npm run test:cover 2>&1 | tee jest_output
 
 # output
-# jest_output.log
+# jest_output
 ````
 
 Run the program: 
 ```bash
-node index.js -f ../../rsi/RevXUI/jest_output.log
-node index.js -f ../../rsi/RevXUI/jest_output_WorkflowAssignmentsGrid
+node index.js -f ../../rsi/RevXUI/jest_output
 
 ```
 

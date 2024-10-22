@@ -127,8 +127,7 @@ function parseLogFile(logContent) {
 function formatAsMarkdown(testSuites) {
   const formatTestSuite = (suite) => {
     const testSuiteIssuesCount = suite.issues.length;
-    const hasMultipleIssues = testSuiteIssuesCount > 1;
-    const testSuiteIssueIndicator = hasMultipleIssues ? `(${testSuiteIssuesCount}) ` : '';
+    const testSuiteIssueIndicator = `(${testSuiteIssuesCount}) `;
 
     const suiteHeader = `- ${testSuiteIssueIndicator} ${suite.name}`;
 
