@@ -6,7 +6,7 @@ Install node packages: `npm install`
 
 Run test and capture the output:
 ```bash 
-npm run test:cover 2>&1 | tee jest_output
+npm run test:cover 2>&1 | tee coverage/jest_output
 
 # output
 # jest_output
@@ -14,7 +14,8 @@ npm run test:cover 2>&1 | tee jest_output
 
 Run the program: 
 ```bash
-node index.js -f ../../rsi/RevXUI/jest_output
+node index.js -f ../../rsi/RevXUI/coverage/jest_output
+
 
 ```
 

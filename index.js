@@ -170,7 +170,6 @@ function formatAsMarkdown(testSuites) {
         issue.components?.length > 0 ? formatComponents(issue.components) : [];
 
     return [issueLine, componentLines].join('\n');
-    // return [issueLine, componentLines];
   };
 
   const formatComponents = (components) => {
@@ -184,7 +183,6 @@ function formatAsMarkdown(testSuites) {
   const testSuitesWithIssues = testSuites.filter((suite) => suite.issues.length > 0);
 
   const testSuitesSorted = testSuitesWithIssues.sort((suiteA, suiteB) => suiteB.issues.length - suiteA.issues.length);
-
   const testSuitesFormatted = testSuitesSorted.map((suite) => formatTestSuite(suite))
 
   return testSuitesFormatted.join('\n');
@@ -192,7 +190,7 @@ function formatAsMarkdown(testSuites) {
 
 // Main function to execute the steps
 const defaultFileName = 'jest_output.log';
-// const defaultFileName = '../../rsi/RevXUI/jest_output_WorkflowAssignmentsGrid';
+
 function logParser(filename = defaultFileName) {
   try {
     fs.accessSync(filename, fs.constants.R_OK);
@@ -201,8 +199,6 @@ function logParser(filename = defaultFileName) {
   }
 
   const logContent = readLogFile(filename);
-  // const logContent = readLogFile('jest_output.log');
-  // const logContent = readLogFile('jest_output_WorkflowAssignmentsGrid');
 
   const testSuites = parseLogFile(logContent);
 
