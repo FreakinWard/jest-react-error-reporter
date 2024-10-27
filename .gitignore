@@ -6,7 +6,11 @@
 
 # production
 /dist
+/build
 
 # dotenv files
 *.env
 .env
+
+# TypeScript files
+tsconfig.tsbuildinfo
