@@ -1,10 +1,12 @@
 # Overview
 
+// TODO: Describe the problem being solved
+
 ## Getting Started
 
 Install node packages: `npm install`
 
-Run test and capture the output:
+Run tests on your source project and capture the output to a file:
 
 ```bash
 npm run test:cover 2>&1 | tee coverage/jest_output
@@ -35,4 +37,4 @@ Expect the output to be copied to the clipboard, for example:
 - Build this into a [custom jest report](https://brunoscheufler.com/blog/2020-02-14-supercharging-jest-with-custom-reporters).
   - [jest-reporter-template](https://github.com/ryparker/jest-reporter-template)
   - https://colinwren.is/blog/writing-a-jest-test-reporter
-- Add tests
+- Create npm package
