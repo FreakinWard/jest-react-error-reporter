@@ -13,7 +13,5 @@ export default function readLogFile(options) {
     throw new Error(`File '${fileName}' does not exist`);
   }
 
-  const logContent = fs.readFileSync(fileName, 'utf-8');
-
-  return logContent;
+  return fs.readFileSync(fileName, 'utf-8');
 }

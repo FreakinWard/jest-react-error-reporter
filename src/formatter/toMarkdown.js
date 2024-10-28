@@ -5,17 +5,14 @@ const testSuitesToMarkdown = (testSuites) => {
 
   const componentsToMarkdown = (components) => {
     const componentLines = components.map((component) => {
-      return `${tabs(2)}- ${component.file}:${component.line}:${component.column}`;
+      return `${tabs(3)}- ${component.file}:${component.line}:${component.column}`;
     });
 
     return [`${tabs(2)}- Components`, ...componentLines].join(newLine);
   };
 
   const issueToMarkdown = (issue) => {
-    const hasMultipleIssues = issue.count > 1;
-    const issueCount = hasMultipleIssues ? `(${issue.count}x) ` : '';
-
-    const issueLine = `${tabs(1)}- ${issueCount}${issue.type} - ${issue.issue}`;
+    const issueLine = `${tabs(1)}- (${issue.count}x) ${issue.type} - ${issue.issue}`;
 
     const componentLines =
       issue.components?.length > 0
@@ -25,11 +22,8 @@ const testSuitesToMarkdown = (testSuites) => {
     return [issueLine, componentLines].join(newLine);
   };
 
-  const testSuiteSoMarkdown = (suite) => {
-    const testSuiteIssuesCount = suite.issues.length;
-    const testSuiteIssueIndicator = `(${testSuiteIssuesCount}) `;
-
-    const suiteHeader = `- ${testSuiteIssueIndicator} ${suite.name}`;
+  const testSuiteToMarkdown = (suite) => {
+    const suiteHeader = `- (${suite.issues.length})  ${suite.name}`;
 
     const getUniqueIssues = () => {
       return suite.issues.reduce((unique, issue) => {
@@ -65,7 +59,7 @@ const testSuitesToMarkdown = (testSuites) => {
     return `${suiteHeader}${newLine}${issueList}`;
   };
 
-  return testSuites.map((suite) => testSuiteSoMarkdown(suite));
+  return testSuites.map((suite) => testSuiteToMarkdown(suite));
 };
 
 export default function toMarkdown(testSuites) {

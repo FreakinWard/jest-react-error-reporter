@@ -49,15 +49,24 @@ const extractIssuesRelatedComponents = (lines, line) => {
   issueStackTrace.forEach((trace) => {
     // Matches lines that contain component information and are within the RevXUI/src/ directory
     // The regex matches if the line starts with /Users/aaronward/dev/rsi/RevXUI/src/ and is followed by any number of characters, then ".tsx:", then one or more digits, then ":", then one or more digits
+    // const matches = trace.match(
+    //     /\/Users\/aaronward\/dev\/rsi\/RevXUI\/src\/(.*\.tsx):(\d+):(\d+)/,
+    // );
+    // const matches = trace.match(/\/src\/(.*\.(tsx|ts)):(\d+):(\d+)/);
+    // const matches = trace.match(/(.*\.(tsx|ts)):(\d+):(\d+)/);
+    // const matches = trace.match(
+    //   /(?:\/src\/|node_modules\/@[^/]+\/[^/]+\/)(.*\.(tsx|ts)):(\d+):(\d+)/,
+    // );
     const matches = trace.match(
-      /\/Users\/aaronward\/dev\/rsi\/RevXUI\/src\/(.*\.tsx):(\d+):(\d+)/,
+      /(?:\/src\/|node_modules\/(@[^/]+\/[^/]+\/.*\.(tsx|ts))|src\/(.*\.(tsx|ts))):(\d+):(\d+)/,
     );
+
     if (matches) {
-      components.push({
-        file: matches[1],
-        line: matches[2],
-        column: matches[3],
-      });
+      const file = matches[0] ?? matches[1];
+      const line = matches[5];
+      const column = matches[6];
+
+      components.push({ file, line, column });
     }
   });
 

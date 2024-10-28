@@ -16,7 +16,7 @@ describe('toMarkdowns', () => {
             components: [
               {
                 column: '3',
-                file: 'components/LogiX/LogiX.tsx',
+                file: 'components/MyGroupViewer/MyGroupViewer.tsx',
                 line: '174',
               },
               {
@@ -33,7 +33,7 @@ describe('toMarkdowns', () => {
             components: [
               {
                 column: '3',
-                file: 'components/LogiX/LogiX.tsx',
+                file: 'components/MyGroupViewer/MyGroupViewer.tsx',
                 line: '174',
               },
               {
@@ -50,7 +50,7 @@ describe('toMarkdowns', () => {
             components: [
               {
                 column: '3',
-                file: 'components/LogiX/LogiX.tsx',
+                file: 'components/MyGroupViewer/MyGroupViewer.tsx',
                 line: '174',
               },
               {
@@ -75,12 +75,12 @@ describe('toMarkdowns', () => {
 - (3)  DataMapperComponent.test
   - (2x) console.error - Warning: An update to CreateDialogAction inside a test was not wrapped in act(...).
     - Components
-    - components/LogiX/LogiX.tsx:174:3
-    - components/DataMapperComponent/DataMapperComponent.tsx:17:3
-  - console.error - Warning: An update to AddSuspenseReason inside a test was not wrapped in act(...).
+      - components/MyGroupViewer/MyGroupViewer.tsx:174:3
+      - components/DataMapperComponent/DataMapperComponent.tsx:17:3
+  - (1x) console.error - Warning: An update to AddSuspenseReason inside a test was not wrapped in act(...).
     - Components
-    - components/LogiX/LogiX.tsx:174:3
-    - components/DataMapperComponent/DataMapperComponent.tsx:17:3
+      - components/MyGroupViewer/MyGroupViewer.tsx:174:3
+      - components/DataMapperComponent/DataMapperComponent.tsx:17:3
 `;
 
     // act
