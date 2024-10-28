@@ -65,9 +65,7 @@ const testSuitesToMarkdown = (testSuites) => {
     return `${suiteHeader}${newLine}${issueList}`;
   };
 
-  const markdown = testSuites.map((suite) => testSuiteSoMarkdown(suite));
-
-  return markdown;
+  return testSuites.map((suite) => testSuiteSoMarkdown(suite));
 };
 
 export default function toMarkdown(testSuites) {
