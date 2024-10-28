@@ -1,3 +1,5 @@
+const newLine = '\n';
+
 const testSuitesToMarkdown = (testSuites) => {
   const tabs = (numberOfTabs) => Array(numberOfTabs).fill('  ').join('');
 
@@ -6,7 +8,7 @@ const testSuitesToMarkdown = (testSuites) => {
       return `${tabs(2)}- ${component.file}:${component.line}:${component.column}`;
     });
 
-    return [`${tabs(2)}- Components`, ...componentLines].join('\n');
+    return [`${tabs(2)}- Components`, ...componentLines].join(newLine);
   };
 
   const issueToMarkdown = (issue) => {
@@ -20,7 +22,7 @@ const testSuitesToMarkdown = (testSuites) => {
         ? componentsToMarkdown(issue.components)
         : [];
 
-    return [issueLine, componentLines].join('\n');
+    return [issueLine, componentLines].join(newLine);
   };
 
   const testSuiteSoMarkdown = (suite) => {
@@ -58,9 +60,9 @@ const testSuitesToMarkdown = (testSuites) => {
       issueToMarkdown(issue),
     );
 
-    const issueList = issueLines.join('\n');
+    const issueList = issueLines.join(newLine);
 
-    return `${suiteHeader}\n${issueList}`;
+    return `${suiteHeader}${newLine}${issueList}`;
   };
 
   const markdown = testSuites.map((suite) => testSuiteSoMarkdown(suite));
@@ -79,7 +81,7 @@ export default function toMarkdown(testSuites) {
 
   const testSuitesFormatted = testSuitesToMarkdown(testSuitesByIssuesDesc);
 
-  const formattedTestSuites = testSuitesFormatted.join('\n');
+  const formattedTestSuites = testSuitesFormatted.join(newLine);
 
-  return `\n${formattedTestSuites}\n`;
+  return `${newLine}${formattedTestSuites}${newLine}`;
 }
