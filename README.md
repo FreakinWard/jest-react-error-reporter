@@ -16,7 +16,7 @@ npm run test:cover 2>&1 | tee coverage/jest_output
 Run the program:
 
 ```bash
-node index.js -f ../../rsi/RevXUI/coverage/jest_output
+node index.js -f ../../dev/MyProject/coverage/jest_output
 ```
 
 Expect the output to be copied to the clipboard, for example:
